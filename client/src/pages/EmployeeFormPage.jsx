@@ -89,10 +89,13 @@ const EmployeeFormPage = () => {
   return (
     <div className="container">
       <div className="page-header">
-        <h1>{isEditMode ? "Edit Employee" : "Add Employee"}</h1>
+        <div>
+          <p className="eyebrow">{isEditMode ? "Edit record" : "New record"}</p>
+          <h1>{isEditMode ? "Edit Employee" : "Add Employee"}</h1>
+        </div>
       </div>
 
-      <div className="auth-card" style={{ maxWidth: 560, margin: 0 }}>
+      <div className="form-card">
         {serverError && <div className="alert alert-error">{serverError}</div>}
 
         <form onSubmit={handleSubmit} noValidate>
