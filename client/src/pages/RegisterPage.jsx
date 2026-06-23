@@ -43,6 +43,7 @@ const RegisterPage = () => {
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
+        <p className="eyebrow">EMS Portal</p>
         <h1>Create an account</h1>
         <p className="subtitle">Start managing your employees</p>
 
