@@ -12,6 +12,10 @@ const formatDate = (dateString) => {
   });
 };
 
+// Builds a short, badge-style staff code from the Mongo ObjectId
+// (last 4 hex characters), purely cosmetic — gives each row a record-like identity.
+const idChip = (id) => `#${id.slice(-4).toUpperCase()}`;
+
 const EmployeeListPage = () => {
   const navigate = useNavigate();
 
@@ -92,20 +96,25 @@ const EmployeeListPage = () => {
   return (
     <div className="container">
       <div className="page-header">
-        <h1>Employees</h1>
+        <div>
+          <p className="eyebrow">Staff directory</p>
+          <h1>Employees</h1>
+        </div>
         <button className="btn btn-primary" onClick={() => navigate("/employees/new")}>
           + Add Employee
         </button>
       </div>
 
       <div className="toolbar">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search by name..."
-          value={search}
-          onChange={handleSearchChange}
-        />
+        <div className="search-input-wrap">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search by name..."
+            value={search}
+            onChange={handleSearchChange}
+          />
+        </div>
       </div>
 
       {error && <div className="alert alert-error">{error}</div>}
@@ -115,7 +124,8 @@ const EmployeeListPage = () => {
           <div className="loading-text">Loading employees...</div>
         ) : employees.length === 0 ? (
           <div className="empty-state">
-            {search ? `No employees found matching "${search}"` : "No employees yet. Add your first one!"}
+            <div className="empty-glyph">∅</div>
+            {search ? `No employees found matching "${search}"` : "No employees yet — add your first one."}
           </div>
         ) : (
           <table>
@@ -133,12 +143,19 @@ const EmployeeListPage = () => {
             <tbody>
               {employees.map((emp) => (
                 <tr key={emp._id}>
-                  <td>{emp.fullName}</td>
-                  <td>{emp.email}</td>
-                  <td>{emp.mobileNumber}</td>
-                  <td>{emp.department}</td>
+                  <td>
+                    <div className="employee-name-cell">
+                      <span className="id-chip">{idChip(emp._id)}</span>
+                      <span>{emp.fullName}</span>
+                    </div>
+                  </td>
+                  <td className="cell-muted">{emp.email}</td>
+                  <td className="cell-muted">{emp.mobileNumber}</td>
+                  <td>
+                    <span className="dept-badge">{emp.department}</span>
+                  </td>
                   <td>{emp.designation}</td>
-                  <td>{formatDate(emp.joiningDate)}</td>
+                  <td className="cell-muted">{formatDate(emp.joiningDate)}</td>
                   <td className="actions-cell">
                     <button
                       className="btn btn-secondary btn-sm"
