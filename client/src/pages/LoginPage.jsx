@@ -40,6 +40,7 @@ const LoginPage = () => {
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
+        <p className="eyebrow">EMS Portal</p>
         <h1>Welcome back</h1>
         <p className="subtitle">Log in to manage your employees</p>
 
