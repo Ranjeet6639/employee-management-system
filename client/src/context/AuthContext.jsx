@@ -1,21 +1,22 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import { loginUser, registerUser } from "../services/authService";
+import { AuthContext } from "./authContextDefinition";
 
-const AuthContext = createContext(null);
-
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // On first load, hydrate auth state from localStorage
-  useEffect(() => {
+// Reads any existing session from localStorage synchronously on first render,
+// avoiding a setState-in-effect cascade just to hydrate initial state.
+const getStoredUser = () => {
+  try {
     const storedUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
-    if (storedUser && token) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
-  }, []);
+    return storedUser && token ? JSON.parse(storedUser) : null;
+  } catch {
+    return null;
+  }
+};
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(getStoredUser);
+  const [loading] = useState(false);
 
   const persistSession = (data) => {
     const { token, ...userData } = data;
@@ -47,12 +48,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };
