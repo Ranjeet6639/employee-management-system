@@ -12,7 +12,10 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <span className="navbar-brand">Employee Management System</span>
+      <span className="navbar-brand">
+        Employee Management
+        <span className="brand-mark">EMS</span>
+      </span>
       {user && (
         <div className="navbar-user">
           <span>Hi, {user.name}</span>
