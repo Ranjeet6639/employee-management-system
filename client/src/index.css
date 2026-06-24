@@ -45,7 +45,7 @@ a {
   outline-offset: 2px;
 }
 
-/* ---------- Layout ---------- */
+/*Layout*/
 .navbar {
   display: flex;
   align-items: center;
@@ -100,7 +100,7 @@ a {
   color: var(--ink-faint);
 }
 
-/* ---------- Auth pages ---------- */
+/*Auth pages*/
 .auth-wrapper {
   display: flex;
   align-items: center;
@@ -158,7 +158,7 @@ a {
   font-weight: 500;
 }
 
-/* ---------- Forms ---------- */
+/*Forms*/
 .form-group {
   margin-bottom: 18px;
 }
@@ -214,7 +214,7 @@ a {
   gap: 16px;
 }
 
-/* ---------- Buttons ---------- */
+/*Buttons*/
 .btn {
   display: inline-flex;
   align-items: center;
@@ -270,7 +270,7 @@ a {
   font-size: 0.8rem;
 }
 
-/* ---------- Alerts ---------- */
+/*Alerts*/
 .alert {
   padding: 11px 14px;
   border-radius: var(--radius-sm);
@@ -291,7 +291,7 @@ a {
   border-color: #bfe0cc;
 }
 
-/* ---------- Page header ---------- */
+/*Page header*/
 .page-header {
   display: flex;
   align-items: flex-end;
@@ -317,7 +317,7 @@ a {
   letter-spacing: -0.015em;
 }
 
-/* ---------- Toolbar (search + filters) ---------- */
+/* Toolbar (search + filters)*/
 .toolbar {
   display: flex;
   gap: 12px;
@@ -359,7 +359,7 @@ a {
   transform: rotate(45deg);
 }
 
-/* ---------- Table ---------- */
+/*Table*/
 .table-wrapper {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -460,7 +460,7 @@ tbody tr:hover {
   margin-bottom: 8px;
 }
 
-/* ---------- Pagination ---------- */
+/* Pagination*/
 .pagination {
   display: flex;
   align-items: center;
@@ -477,7 +477,7 @@ tbody tr:hover {
   padding: 0 8px;
 }
 
-/* ---------- Modal (delete confirm) ---------- */
+/*Modal (delete confirm)*/
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -517,7 +517,7 @@ tbody tr:hover {
   margin-top: 22px;
 }
 
-/* ---------- Spinner ---------- */
+/* Spinner */
 .spinner {
   display: inline-block;
   width: 14px;
@@ -526,6 +526,11 @@ tbody tr:hover {
   border-top-color: white;
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
+}
+
+.btn-secondary .spinner {
+  border: 2px solid rgba(22, 24, 29, 0.15);
+  border-top-color: var(--ink-soft);
 }
 
 @keyframes spin {
@@ -542,7 +547,7 @@ tbody tr:hover {
   font-size: 0.85rem;
 }
 
-/* ---------- Form card (add/edit employee) ---------- */
+/* Form card (add/edit employee)*/
 .form-card {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -551,7 +556,7 @@ tbody tr:hover {
   max-width: 600px;
 }
 
-/* ---------- Responsive ---------- */
+/* Responsive*/
 @media (max-width: 640px) {
   .form-row {
     grid-template-columns: 1fr;
