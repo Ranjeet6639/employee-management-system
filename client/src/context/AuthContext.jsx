@@ -2,8 +2,6 @@ import { useState } from "react";
 import { loginUser, registerUser } from "../services/authService";
 import { AuthContext } from "./authContextDefinition";
 
-// Reads any existing session from localStorage synchronously on first render,
-// avoiding a setState-in-effect cascade just to hydrate initial state.
 const getStoredUser = () => {
   try {
     const storedUser = localStorage.getItem("user");

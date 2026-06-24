@@ -2,7 +2,7 @@ import api from "./api";
 
 export const getEmployees = async (params = {}) => {
   const { data } = await api.get("/employees", { params });
-  return data; // { success, data: [...], pagination: {...} }
+  return data; 
 };
 
 export const getEmployeeById = async (id) => {
