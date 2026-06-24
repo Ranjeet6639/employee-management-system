@@ -227,7 +227,7 @@ A few notable decisions and issues worked through while building this:
 
 > _To be filled in once deployed._
 
-- **Frontend:** https://employee-management-system-kohl-eight.vercel.app/login
+- **Frontend:** https://employee-management-system-kohl-eight.vercel.app
 - **Backend API:** https://employee-management-system-ykvd.onrender.com/api/health
 
 ## License
