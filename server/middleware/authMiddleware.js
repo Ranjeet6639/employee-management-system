@@ -2,8 +2,6 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("./asyncHandler");
 const User = require("../models/User");
 
-// Protects routes by verifying the JWT sent in the Authorization header.
-// Expected header format: "Authorization: Bearer <token>"
 const protect = asyncHandler(async (req, res, next) => {
   let token;
 

@@ -1,14 +1,9 @@
-// Centralized error handling middleware.
-// Any error passed to next(err) or thrown inside an async route (caught by asyncHandler)
-// ends up here, so we always return a consistent JSON error shape.
-
 const notFound = (req, res, next) => {
   const error = new Error(`Route not found - ${req.originalUrl}`);
   res.status(404);
   next(error);
 };
 
-// eslint-disable-next-line no-unused-vars
 const errorHandler = (err, req, res, next) => {
   let statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
   let message = err.message || "Server Error";
