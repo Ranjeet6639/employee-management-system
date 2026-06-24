@@ -12,8 +12,6 @@ const formatDate = (dateString) => {
   });
 };
 
-// Builds a short, badge-style staff code from the Mongo ObjectId
-// (last 4 hex characters), purely cosmetic — gives each row a record-like identity.
 const idChip = (id) => `#${id.slice(-4).toUpperCase()}`;
 
 const EmployeeListPage = () => {
@@ -30,6 +28,7 @@ const EmployeeListPage = () => {
   const [error, setError] = useState("");
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [navigatingTo, setNavigatingTo] = useState(null);
 
   const fetchEmployees = useCallback(async () => {
     setLoading(true);
@@ -45,7 +44,6 @@ const EmployeeListPage = () => {
     }
   }, [search, sortBy, order, page]);
 
-  // Debounce search input so we don't fire a request on every keystroke
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       fetchEmployees();
@@ -71,6 +69,11 @@ const EmployeeListPage = () => {
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
     setPage(1);
+  };
+
+  const handleNavigate = (target, path) => {
+    setNavigatingTo(target);
+    setTimeout(() => navigate(path), 300);
   };
 
   const confirmDelete = async () => {
@@ -100,8 +103,13 @@ const EmployeeListPage = () => {
           <p className="eyebrow">Staff directory</p>
           <h1>Employees</h1>
         </div>
-        <button className="btn btn-primary" onClick={() => navigate("/employees/new")}>
-          + Add Employee
+        <button
+          className="btn btn-primary"
+          onClick={() => handleNavigate("new", "/employees/new")}
+          disabled={navigatingTo === "new"}
+        >
+          {navigatingTo === "new" && <span className="spinner" />}
+          {navigatingTo === "new" ? "Opening..." : "+ Add Employee"}
         </button>
       </div>
 
@@ -159,9 +167,11 @@ const EmployeeListPage = () => {
                   <td className="actions-cell">
                     <button
                       className="btn btn-secondary btn-sm"
-                      onClick={() => navigate(`/employees/${emp._id}/edit`)}
+                      onClick={() => handleNavigate(emp._id, `/employees/${emp._id}/edit`)}
+                      disabled={navigatingTo === emp._id}
                     >
-                      Edit
+                      {navigatingTo === emp._id && <span className="spinner" />}
+                      {navigatingTo === emp._id ? "Opening..." : "Edit"}
                     </button>
                     <button className="btn btn-danger btn-sm" onClick={() => setDeleteTarget(emp)}>
                       Delete
